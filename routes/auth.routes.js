@@ -4,8 +4,8 @@ const express = require("express");
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.model");
-const Homestager = require("../model/Homestager.model");
-const Message = require("..model/Message.model");
+const Homestager = require("../models/Homestager.model");
+const Message = require("../models/Message.model");
 const { isAuthenticated } = require('./../middleware/jwt.middleware.js');
 
 const router = express.Router();
@@ -16,7 +16,9 @@ const saltRounds = 10;
 // POST  /auth/signup
 router.post('/signup', (req, res, next) => {
   const { email, password, name } = req.body;
+  const { description } = req.body;
  
+  console.log('description: ' + description);
   // Check if email or password or name are provided as empty string 
   if (email === '' || password === '' || name === '') {
     res.status(400).json({ message: "Provide email, password and name" });

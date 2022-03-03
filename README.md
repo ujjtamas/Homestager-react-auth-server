@@ -1,4 +1,4 @@
-# Darts 2.0
+# Homestager
 
 ## Online darts game for 2 players
 
