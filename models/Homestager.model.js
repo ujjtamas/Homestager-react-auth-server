@@ -6,9 +6,9 @@ const { Schema, model } = mongoose;
 
 const homestagerSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "User" },
-    contact: { type: String, required: true },
-    description: { type: String, required: true },
-    location: { type: Object, required: true },
+    contact: { type: String },
+    description: { type: String },
+    location: { type: Object },
     portfolio: [String]
 })
 

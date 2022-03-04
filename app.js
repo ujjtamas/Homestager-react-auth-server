@@ -18,7 +18,10 @@ const taskRouter = require("./routes/task.routes");
 app.use("/api", isAuthenticated, taskRouter); */
 
 const authRouter = require("./routes/auth.routes");
-app.use("/auth", authRouter);   
+app.use("/auth", authRouter);
+
+const updateRouter = require("./routes/user.routes");
+app.use("/user",updateRouter);
 
 require("./error-handling")(app);
 

@@ -17,8 +17,9 @@ const saltRounds = 10;
 router.post('/signup', (req, res, next) => {
   const { email, password, name } = req.body;
   const { description } = req.body;
+  const { isHomestager } = req.body;
  
-  console.log('description: ' + description);
+  // console.log('description: ' + description);
   // Check if email or password or name are provided as empty string 
   if (email === '' || password === '' || name === '') {
     res.status(400).json({ message: "Provide email, password and name" });
@@ -64,7 +65,23 @@ router.post('/signup', (req, res, next) => {
     
       // Create a new object that doesn't expose the password
       const user = { email, name, _id };
- 
+      const homestager = {user: _id, description, contact: '', location: '', portfolio: []}
+      if(isHomestager){
+        console.log('create homestager');
+        Homestager.findOne({user: _id})
+          .then((foundHomestager) =>{
+            if (foundHomestager) {
+              res.status(400).json({ message: "Homestager already exists." });
+              return;
+            }
+            return Homestager.create(homestager);
+          })
+          .then((createdHomestager) => {
+            console.log('Created homestager: ' + createdHomestager);
+          })
+          .catch((err) => console.log(err));
+      }
+
       // Send a json response containing the user object
       res.status(201).json({ user: user });
     })
