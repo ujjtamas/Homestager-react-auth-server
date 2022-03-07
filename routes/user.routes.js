@@ -41,7 +41,6 @@ router.post('/upload', (req, res, next) => {
 });
 
 router.get('/profile/:userid', (req,res,next) =>{
-  console.log('GET');
   const { userid } = req.params;
   let resp = {};
   
@@ -71,6 +70,46 @@ router.get('/profile/:userid', (req,res,next) =>{
       })
       .catch((err) => console.log(err));
   })
-  
+
+  router.get('/homestagers',(req,res,next) =>{
+    const resp = {};
+    Homestager.find({})
+      .populate('user')
+      .then((foundHomestagers) => {
+        resp.homestagers = foundHomestagers;
+        return resp;
+      })
+      .then(() => {
+        res.status(200).json(resp);
+      })
+      .catch((err) => console.log(err)) 
+    /* User.find({isHomestager: true})
+      .then((foundHomestagers) => {
+        resp.homestagers = foundHomestagers;
+        return resp;
+      })
+      .then(() => {
+        res.status(200).json(resp);
+      })
+      .catch((err) => console.log(err)) */
+  })
+
+  router.post('/profile', (req,res,next) =>{
+    let resp={};
+    const { name , id } = req.body;
+
+    User.findById(id)
+      .then((foundUser) => {
+        if(foundUser){
+          foundUser.name = name;
+          foundUser.save();
+          resp.name = name;
+        }
+      })
+      .then(() => {
+        res.status(201).json(resp);
+      })
+      .catch((err) =>{console.log(err)})
+  })
 
 module.exports = router;
