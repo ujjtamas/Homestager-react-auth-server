@@ -3,9 +3,11 @@ const { Schema, model } = mongoose;
 
 
 const messageSchema = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: "User" },
-    homestager: { type: Schema.Types.ObjectId, ref: "User" },
-    message: [String]
+    sender: { type: Schema.Types.ObjectId, ref: "User" },
+    receiver: { type: Schema.Types.ObjectId, ref: "User" },
+    answered: {type: Boolean},
+    response: {type: Schema.Types.ObjectId, ref:"Message"},
+    message: {type: Object}
 });
 
 module.exports = model("Message", messageSchema);

@@ -43,7 +43,6 @@ router.post('/upload', (req, res, next) => {
 router.get('/profile/:userid', (req,res,next) =>{
   const { userid } = req.params;
   let resp = {};
-  
    User.findById(userid) 
       .then((foundUser) => {
         if(foundUser){
