@@ -3,6 +3,7 @@ require("./db");
 const express = require("express");
 const { isAuthenticated } = require("./middleware/jwt.middleware");
 
+const cors = require("cors");
 const app = express();
 
 require("./config")(app);
@@ -29,7 +30,6 @@ app.use(
       credentials: true
     })
   );
-
 require("./error-handling")(app);
 
 module.exports = app;
