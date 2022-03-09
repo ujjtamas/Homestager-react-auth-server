@@ -23,6 +23,13 @@ app.use("/auth", authRouter);
 const updateRouter = require("./routes/user.routes");
 app.use("/user",updateRouter);
 
+app.use(
+    cors({
+      origin: process.env.FRONTEND_URL,
+      credentials: true
+    })
+  );
+
 require("./error-handling")(app);
 
 module.exports = app;
