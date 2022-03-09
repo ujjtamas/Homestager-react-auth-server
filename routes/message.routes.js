@@ -42,7 +42,7 @@ router.get("/get/:_id", (req,res,next) =>{
     .populate('sender')
     .populate('receiver')
     .then((foundMessage) => {
-      console.log(foundMessage);
+      // console.log(foundMessage);
       res.json(foundMessage);
     })
     .catch((err) => console.log(err));

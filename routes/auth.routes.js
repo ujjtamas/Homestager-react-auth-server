@@ -76,7 +76,7 @@ router.post('/signup', (req, res, next) => {
             return Homestager.create(homestager);
           })
           .then((createdHomestager) => {
-            console.log('Created homestager: ' + createdHomestager);
+            // console.log('Created homestager: ' + createdHomestager);
           })
           .catch((err) => console.log(err));
       }
@@ -143,7 +143,7 @@ router.get('/verify', isAuthenticated, (req, res, next) => {       // <== CREATE
  
   // If JWT token is valid the payload gets decoded by the
   // isAuthenticated middleware and made available on `req.payload`
-  console.log(`req.payload`, req.payload);
+  // console.log(`req.payload`, req.payload);
  
   // Send back the object with user data
   // previously set as the token payload
